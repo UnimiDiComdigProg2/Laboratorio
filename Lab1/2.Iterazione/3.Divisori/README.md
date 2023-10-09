@@ -7,9 +7,9 @@ quindi i **divisori propri** di 12 sono: 1, 2, 3, 4, 6.
 ##### Esempio d'esecuzione:
 
 ```text
-$ java divisori 6
+$ java Divisori 6
 Divisori di 6: 1 2 3 
 
-$ java divisori 10
+$ java Divisori 10
 Divisori di 10: 1 2 5 
 ```
