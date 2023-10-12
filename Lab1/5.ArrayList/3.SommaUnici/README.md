@@ -1,9 +1,8 @@
 # Somma unici
 
-Scrivere un programma che legga da **riga di comando** una sequenza di valori e stampi a video la somma dei valori letti che rappresentano numeri interi e che compaiono nella sequenza una sola volta.
+Scrivere un programma che legga da **standard input** una sequenza di valori e stampi a video la somma dei valori letti che rappresentano numeri interi e che compaiono nella sequenza una sola volta.
 
-Oltre al metodo `main()`, devono essere definiti ed utilizzati i seguenti metodi:
-* `public static ArrayList<Integer> leggiNumeri()` che restituisce una `ArrayList` nella quale sono memorizzati i valori numerici interi specificati a **riga di comando**;
+Oltre al metodo `main()`, deve essere definito ed utilizzato il seguente metodo:
 * `public static int occorrenze(ArrayList<Integer> numeri, int n)` che restituisce un valore `int` pari al numero di occorrenze di `n` in `numeri`.
 
 ##### Esempio d'esecuzione:
