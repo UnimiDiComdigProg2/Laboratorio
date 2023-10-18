@@ -49,4 +49,3 @@ valore in memoria: 18.0
 =
 Il risultato finale e' 18.0
 ```
-
