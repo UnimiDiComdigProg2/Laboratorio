@@ -1,11 +1,9 @@
 //Grazie a Nicola Montagnese per il codice
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Clone {
-
 	public static void main(String[] args) {
 	
 		String nome = args[0];
@@ -13,7 +11,7 @@ public class Clone {
 
 		Scanner s = new Scanner(System.in);
 		System.out.println("Inserisci i cromosomi, uno per riga (terminare con CTRL+D):");
-		while (s.hasNext())
+		while(s.hasNext())
 			dna.add(s.next());
 
 		try {
@@ -22,17 +20,17 @@ public class Clone {
 			try {
 				Sheep clone = (Sheep) pecora.clone();
 				System.out.println("Ho creato un clone di " + nome);
-				
-				if (pecora.equals(clone))
+
+				if(pecora.equals(clone))
 					System.out.println("I due pokemon sono uguali");
 				else 
 					System.out.println("I due pokemon sono diversi... controlla nei box...");
-				
+
 				Scanner t = new Scanner(System.in);
 				System.out.println("Inserisci il cromosoma da modificare ed il nuovo codice:");
 				int indice = Integer.parseInt(t.next());
 				String cromosoma = t.next();
-				
+
 				try {
 					clone.sostituisciCromosoma(cromosoma, indice);
 

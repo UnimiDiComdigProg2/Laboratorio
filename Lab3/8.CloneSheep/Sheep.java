@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Sheep implements Cloneable {
-// OVERVIEW: it models a a sheep with a its dna and a unique name
-// note this class is immutable, it doesn't allow manipolators methods
+// OVERVIEW: it models a a sheep with its dna and a unique name
+// note this class is immutable, it doesn't allow manipolator methods
 // if an istance of the class is created it'll be a new one or a clone
 // attributes are therefore final
 	final private ArrayList<String> dna;
@@ -14,16 +14,14 @@ public class Sheep implements Cloneable {
 
 //constructors
 	public Sheep(ArrayList<String> dna, String nome) throws NullPointerException, IllegalArgumentException {
-	//MODIFIES: this statements
+	//MODIFIES: this
 	//EFFECTS: it creates an unique istance of a sheep
-	//         note if dna is null, or nome is null or is empty, it throws respectively
-	//         nullpointer or illegal exception
+	//         note if dna is null, or nome is null / empty, it throws respectively NullPointerException or IllegalArgumentException
+		if(dna == null || dna.size() == 0)
+			throw new NullPointerException("Dna cannot be null or empty");
 
-		if (dna == null)
-			throw new NullPointerException("Dna cannot be empty");
-
-		if (nome.equals("") || nome == null)
-			throw new InputMismatchException("Name must be declared");
+		if(nome.equals("") || nome == null)
+			throw new IllegalArgumentException("Name must be declared");
 
 		this.dna = (ArrayList<String>)(dna.clone());
 		this.nome = nome;
@@ -32,8 +30,7 @@ public class Sheep implements Cloneable {
 
 // METHODS:
 	public ArrayList<String> getDna() { // OBSERVER //DRAGAN: bella questa cosa di segnalare che tipo di metodo è
-	//EFFECTS: it returns the name of the sheep
-		return (ArrayList<String>) this.dna.clone();
+		return (ArrayList<String>) this.dna.clone(); //cloned to avoid rep exposure
 	}
 
 	public String getNome() { // OBSERVER
@@ -52,11 +49,8 @@ public class Sheep implements Cloneable {
 		if(!(p.nome.equals(this.nome))) //usare sintassi diretta invece dei getter è possibile qua dentro (e meno dispendioso)
 			return false;
 
-		//ArrayList<String> dna = this.getDna(); DRAGAN: queste istruzioni clonano il dna il che qua non serve perchè tanto non li modifico. È solo dispendioso come risorse. meglio usare accesso diretto 
-		//ArrayList<String> dnaToCompare = p.getDna();
-
 		try {
-			for (int i = 0; i < dna.size(); i++)
+			for(int i = 0; i < dna.size(); i++)
 				if(!(this.leggiCromosoma(i).equals(p.leggiCromosoma(i)))) //DRAGAN: se si usa leggiCromosoma invece del get si ottiene gratuitamente il controllo del range dell'indice, potendo così usare un try/catch per gestire la cosa
 					return false;
 
@@ -67,7 +61,7 @@ public class Sheep implements Cloneable {
 		return true;
 	}
 
-	public Object clone() throws CloneNotSupportedException { // CLONE
+	public Object clone() throws CloneNotSupportedException { //CLONE in questo caso viene usato il dna clonato e il costruttore per clonare. Si poteva usare shallow clone
 		ArrayList<String> lista = this.getDna();
 		String nome = this.getNome();
 
@@ -90,17 +84,17 @@ public class Sheep implements Cloneable {
 		if((indice <= 0) || (indice >= this.dna.size()))
 			throw new InputMismatchException("indice fuori dal range del dna"); //DRAGAN: anche qua ci sta controllare sul range dell'indice
 
-		if (cromosoma.equals("") || cromosoma == null)
+		if(cromosoma.equals("") || cromosoma == null)
 			throw new InputMismatchException("Name must be declared"); //DRAGAN: ci sta anche controllare la stringa
 
 		this.dna.set(indice, cromosoma);
 	}
 
 	public boolean repOk() { // REPRESENTATION INVARIANT
-		if (this.dna == null)
+		if(dna == null || dna.size() == 0)
 			return false;
 
-		if (this.nome.equals("") || this.nome == null)
+		if(this.nome.equals("") || this.nome == null)
 			return false;
 
 		return true;
