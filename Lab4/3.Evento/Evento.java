@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
@@ -107,3 +108,127 @@ public final class Evento {
 		System.out.println(promemoria);
 	}
 }
+=======
+import java.util.Date;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public final class Evento {
+    //OVERVIEW:  classe che modella un evento di un calendario, definito da una data specificata e dal suo nome. Modelliamo il dato che immutabile
+    //
+    private final String nome;
+    private final Date data;
+
+    //construttore
+    public Evento(Date data, String nome) throws IllegalArgumentException {
+        //MODIFIES: this
+        // EFFECTS: inizializza un evento  con data e nome specificati
+        // se il nome è vuoto o la data o il nome sono null lancia una IllegalArgumentException
+
+        if (data==null)
+         throw new IllegalArgumentException("Data nulla");
+        if (nome==null)
+         throw new IllegalArgumentException("Nome nullo");
+        if (nome=="")
+         throw new IllegalArgumentException("Nome vuoto");
+
+        this.nome=nome;
+        this.data=(Date) (data.clone());
+
+        assert repOk();
+
+    }
+
+    //metodi
+
+    public String getNome() {
+      return this.nome;
+    }
+    public Date getData() {
+    return (Date) (this.data.clone());
+
+
+    }
+
+    public Evento copiaEvento (int offset) {
+        //EFFECTS: restituisce un evneto nuovo a distanza di offset giorni
+         Date newdata = new Date(this.data.getTime()+TimeUnit.DAYS.toMillis(offset));
+         return new Evento(newdata, this.nome);
+
+    }
+
+private boolean repOk() {
+    if ((this.data!= null)&& (this.nome!=null)&&(this.nome!=""))
+     return true;
+    return false;
+}
+
+     @Override
+     public String toString(){
+
+        return this.nome + " in data: " + this.data.getDate() + "/" + (this.data.getMonth()+1) + "/" + (this.data.getYear()+1900);
+     }  
+
+   
+    public boolean  equals(Object o) {
+        if (o==null) 
+            return false;
+        if (!(o instanceof Evento))
+            return false;
+
+        Evento tmpEvento = (Evento)o;
+        if (this.data.equals(tmpEvento.data)&& this.nome.equals(tmpEvento.nome))
+            return true;
+    
+    return false;
+
+    }
+
+    public static void main(String[] args) {
+        Scanner tastiera = new Scanner (System.in);
+
+        System.out.println ("Inserisci la data del primo evento: ");
+        String[] stringData1 = tastiera.next().split("/");
+        int giorno1 = Integer.parseInt(stringData1[0]);
+        int mese1 = Integer.parseInt(stringData1[1])-1;
+        int anno1 = Integer.parseInt(stringData1[2])-1900;
+
+        System.out.println ("Inserisci il nome del primo evento: ");
+        String nomeEvento1 = tastiera.next();
+      
+        Date dataEvento1 = new Date(anno1,mese1,giorno1);
+        
+        Evento Evento1 = new Evento(dataEvento1,nomeEvento1);
+        Evento1.getData().setDate(2);
+
+        System.out.println("Evento 1 è : "+ Evento1);
+
+        System.out.println ("Inserisci la data del secondo evento: ");
+
+        String[] stringData2 = tastiera.next().split("/");
+        int giorno2 = Integer.parseInt(stringData2[0]);
+        int mese2 = Integer.parseInt(stringData2[1])-1;
+        int anno2 = Integer.parseInt(stringData2[2])-1900;
+
+        System.out.println ("Inserisci il nome del secondo evento: ");
+        String nomeEvento2 = tastiera.next();
+      
+        Date dataEvento2 = new Date(anno2,mese2,giorno2);
+        Evento Evento2 = new Evento(dataEvento2,nomeEvento2);
+
+        System.out.println("Evento 2 è : "+ Evento2);
+
+        if (Evento1.equals(Evento2))
+            System.out.println("I due eventi sono uguali");
+
+
+        Evento promemoria = Evento1.copiaEvento(2);
+
+ System.out.println("il promemoria è : "+ promemoria);
+
+
+
+    }
+    
+}
+>>>>>>> 6aead8b (ste)
