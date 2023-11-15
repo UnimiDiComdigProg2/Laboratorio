@@ -41,7 +41,7 @@ public class Punto3D implements Punto {
     
             Punto3D tmp = (Punto3D) o;
     
-            if(this.p != tmp.p)
+            if(!(this.p.equals(tmp.p)))
                 return false;
     
             if(this.z != tmp.z)
