@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Segmento3D implements Segmento {
 
     private final Punto3D a, b;
@@ -32,7 +35,6 @@ public class Segmento3D implements Segmento {
     }
 
 
-
     public double length() {
         return Math.sqrt(
             Math.pow(this.a.p.x - this.b.p.x, 2) +
@@ -40,4 +42,39 @@ public class Segmento3D implements Segmento {
             Math.pow(this.a.z - this.b.z, 2)
         );
     }
+
+    @Override
+    public String toString() {
+        return "Segmento: [" + a + " " + b + "] lunghezza: " + this.length();
+    }
+
+    public static void main(String[] args) {
+        double lenmin = Double.parseDouble(args[0]);
+
+        Scanner s = new Scanner(System.in);
+
+        ArrayList<Segmento3D> list = new ArrayList<>();
+
+        System.out.println("Inserisci i segmenti nel formato ax ay az bx by bz (temina con CTRL+D)");
+        while(s.hasNextLine()) {
+
+            String line = s.nextLine();
+
+            String[] parts = line.split(" ");
+            
+            list.add(
+                new Segmento3D(
+                    new Punto3D(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]), Double.parseDouble(parts[2])),
+                    new Punto3D(Double.parseDouble(parts[3]), Double.parseDouble(parts[4]), Double.parseDouble(parts[5]))
+                )
+            );
+        }
+
+        System.out.println("Segmenti di lunghezza superiore a " + lenmin);
+
+        for(Segmento3D s3d : list)
+           if(s3d.length() > lenmin)
+                System.out.println(s3d); 
+    }
+    
 }
