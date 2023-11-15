@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -144,3 +145,154 @@ public class Pretendenti implements Iterable<Integer> {
 		System.out.println("il numero " + p.getPrimo() + " è il fortunato vincitore");
 	}
 }
+=======
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class Pretendenti implements Iterable<Integer> {
+    //OVERVIEW modellare una lista di pretendenti da selezionare 
+
+ArrayList<Integer> pretendenti;
+
+    //costruttori
+    public Pretendenti(int n) throws IllegalArgumentException { 
+    //MODIFIES: this
+    //EFFECTS: inizializza this con n pretendenti
+    //se n è minore uguale a zero lancio una IllegalArgumentException
+    if(n<=0)
+    throw new IllegalArgumentException("La lista deve avere almeno un pretendente");
+
+    this.pretendenti = new ArrayList<Integer>();
+    for (int i = 1; i <=n; i++) {
+        this.pretendenti.add(i);
+                
+    }
+    assert repOK();
+
+    }
+    //metodi
+
+    public int getPrimo() throws IllegalStateException{
+        //EFFECTS: restituire l'ultimo pretendente
+       // se la lista contiene più di un pretendente allora lancio una IllegalStateException
+       if (this.pretendenti.size()!=1)
+        throw new IllegalStateException("Deve esserci un solo vincitore");
+        
+        return this.pretendenti.get(0);
+
+    }
+
+
+    @Override
+    public String toString(){
+        String ret = "Pretendenti: ";
+        for (int i : this.pretendenti) {
+            ret+=i + " ";
+        }
+        return ret;
+    }
+    
+    public boolean repOK() {
+        for (Integer i : pretendenti) 
+          if (i==null || i<=0)
+                 return false;
+            return true;
+           
+       
+    }
+
+
+    @Override
+      public Iterator<Integer> iterator(){
+        //EFFECTS: restituisce un iteratore che seleziona il pretendente  eliminare a poi salta di tre
+        //MODIFIES: modifica la lista dei pretendenti elimando quello selezionato
+         return new Iterator<Integer>() {
+            //OVERVIEW:  iterator che conta  ogni volta tre pretendenti eliminandone uno ogni tre.
+            boolean direction = true;
+            boolean removed = true;
+            int current = 0;
+
+            @Override
+            public boolean hasNext() {
+            //EFFECTS: restituisce true in caso di pretendenti eliminabile e false altrimenti
+            return Pretendenti.this.pretendenti.size() > 1;
+                   }
+
+            @Override
+            public Integer next() throws NoSuchElementException {
+                //MODIFIES: this
+                //EFFECTS: restiutisce il prossimo pretendente da eliminare e aggiorna l'indice aggiorna la direzione imposta il flag removed a false
+                // se non ci sono più elementi lancia una NoSuchelementException
+                 if (!(this.hasNext()))
+                    throw new NoSuchElementException("non si sono piuù pretendneti");
+                if (this.direction)
+                    this.current+=2;
+                else    
+                    this.current-=2;
+                
+                if (this.current>=Pretendenti.this.pretendenti.size()-1){
+                    this.current= 2*(Pretendenti.this.pretendenti.size()-1)-(this.current);
+                    this.direction=false;
+
+                }
+
+                if (this.current<=0){
+                    this.current= -this.current;
+                    this.direction=true;
+                }
+                
+                this.removed=false;
+                return Pretendenti.this.pretendenti.get(this.current);
+
+              }
+
+            @Override
+            public void remove() throws IllegalStateException {
+                //this.pretendenti this
+                //EFFECTS rimuovere il pretendente selezionato dal next()  e agggiornare l'indice 
+                //se sto eliminado senza aver fatto prima una next() allora lancio una IllegalStateException
+            if (this.removed)
+                throw new IllegalStateException("non puoi eliminare se prima non selezioni un nuvo pretendente da eliminare");
+                Pretendenti.this.pretendenti.remove(this.current);
+                this.removed=true;
+                if (!this.direction)
+                    this.current--;
+                if (this.current>Pretendenti.this.pretendenti.size()-1)
+                    this.current--;
+                if (this.current==Pretendenti.this.pretendenti.size()-1)
+                    this.direction=false;
+                if (this.current==0)
+                    this.direction=true;
+            
+                 assert repOK();   
+
+
+            }
+        @Override
+        public String toString() {
+            String dirstring = direction ? "avanti" : "indietro";
+            return "si conta da " + Pretendenti.this.pretendenti.get(this.current) + " direzione "+ dirstring;
+            
+        }
+             
+         };
+
+        
+    }
+
+    public static void main(String[] args) {
+        int  n =Integer.parseInt(args[0]);
+        Pretendenti p = new Pretendenti(n);
+        Iterator<Integer> i = p.iterator();
+
+        while (i.hasNext()){
+            System.out.println(p);
+            System.out.println(i);
+            System.out.println("Elimino " + i.next());
+            i.remove();
+        }
+    System.out.println("Il pretendente vincitore è " + p.getPrimo());
+    }
+}
+>>>>>>> 7c5106a (ste)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.Iterator;
 class Fibonacci implements Iterator<Integer> {
 //OVERVIEW: Iterator che produce in sequenza i numeri di Fibonacci
@@ -29,3 +30,38 @@ class Fibonacci implements Iterator<Integer> {
 			System.out.println(f.next());
 	}
 }
+=======
+import java.util.Iterator;
+
+public class Fibonacci implements Iterator<Integer> {
+    //OVERVIEW: ....
+    private int[] result ={0,1};
+@Override
+    public boolean hasNext(){
+        //EFFECTS: 
+
+        return true;
+
+    }
+@Override
+    public Integer next() {
+        //EFFECTS: ...
+        int tmp = this.result[1];
+        this.result[1]= this.result[0]+this.result[1];
+        this.result[0]= tmp;
+        return tmp;
+    }
+
+    public static void main(String[] args) {
+        int n = Integer.parseInt(args[0]);
+        Fibonacci f = new  Fibonacci();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(f.next());
+            
+        }
+
+    }
+    
+}
+>>>>>>> 7c5106a (ste)
