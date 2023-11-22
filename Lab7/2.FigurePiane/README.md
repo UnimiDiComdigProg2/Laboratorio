@@ -1,6 +1,6 @@
 # FigurePiane
 
-Progettare, specificare ed implementare una gerarchia di classi di figure piane (immutabili) e un'interfaccia `Figura` contenente i metodi comuni a tutte le figure piane, incluso un metodo `perimetro()`. L'interfaccia stessa deve implementare l'interfaccia `Comparable<Figura>` e quindi contenere il metodo `compareTo()` che dovrà confrontare una `Figura` con un'altra in base al loro perimetro. Definire almeno le seguenti figure in una gerarchia opportuna: `Triangolo`, `Rettangolo`, `Quadrato` e `Cerchio`.
+Progettare, specificare ed implementare una gerarchia di classi di figure piane (immutabili) e un'interfaccia `Figura` contenente i metodi comuni a tutte le figure piane, incluso un metodo `perimetro()`. L'interfaccia stessa deve implementare l'interfaccia `Comparable<Figura>` (Impossibile? https://stackoverflow.com/questions/3921412/why-an-interface-can-not-implement-another-interface, per caso vuole una classe astratta 'Figura'?) e quindi contenere il metodo `compareTo()` che dovrà confrontare una `Figura` con un'altra in base al loro perimetro. Definire almeno le seguenti figure in una gerarchia opportuna: `Triangolo`, `Rettangolo`, `Quadrato` e `Cerchio`.
 
 Creare una classe `Collage` contenente una lista di oggetti di tipo `Figura`, e che abbia un metodo `ordinaPerPerimetro()` per riordinare gli elementi della lista in base al loro perimetro. Per fare questo sarà sufficiente usare il sorting naturale della lista di figure (`sort(null)`), dato che le figure implementano l'interfaccia `Comparable<Figura>`.
 
