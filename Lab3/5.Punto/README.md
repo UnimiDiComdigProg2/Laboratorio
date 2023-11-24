@@ -30,6 +30,6 @@ Terminare la lettura con CTRL+D
 7 -8
 
 I punti più distanti sono:
-{Punto: 3, 4}
-{7 -8}
+{Punto: 1, 6}
+{Punto: 7 -8}
 ```
