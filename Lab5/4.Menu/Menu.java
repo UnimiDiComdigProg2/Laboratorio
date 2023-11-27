@@ -100,56 +100,84 @@ public class Menu implements Iterable<Piatto> {
 		assert repOk();
 	}
 
-	public Iterator<Piatto> iterator() { //notare l'uso di null per evitare di scrivere due volte il codice o dover fare IteraPiatti Inner non Local
+	public Iterator<Piatto> iterator() {
 		return this.iterator(null);
 	}
 
 	public Iterator<Piatto> iterator(String type) { // ITERATOR
+	//questo è una versione semplice dell'iterator, accumula (filtra) gli oggetti d'interesse e poi usa il meccanismo di composizione/delega
 
-		class IteraPiatti implements Iterator<Piatto> { // INNER CLASS. si poteva fare astratta?
-		String type;
-		Piatto next;
-		Iterator<Piatto> iters;
+		ArrayList<Piatto> piattiFiltrati;
 
-		private IteraPiatti(String type) {
-			this.type = type;
-			this.next = null;
-			this.iters = Menu.this.piatti.iterator();
-
-			while(iters.hasNext()) {
-				Piatto tmp = iters.next();
-				if(type == null || tmp.getTipo().equals(type)) {
-					this.next = tmp; // imposto il primo elemento next. se non lo trova rimane null
-					break;
-				}
-			}
+		if(type == null)
+			piattiFiltrati = piatti;
+		else {
+			piattiFiltrati = new ArrayList<>();
+			for(Piatto p : piatti)
+				if(p.getTipo().equals(type))
+					piattiFiltrati.add(p);
 		}
 
-		public boolean hasNext() { 
-			if(this.next == null)
-				return false;
+		return new Iterator<Piatto>() {
 
-			return true;
-		}
+			Iterator<Piatto> i = piattiFiltrati.iterator(); //composizione
 
-		public Piatto next(){
-			if(this.next == null)
-				throw new NoSuchElementException("Non ci sono più piatti");
-
-			Piatto ret = this.next;
-
-			while(iters.hasNext()) {
-				Piatto tmp = iters.next();
-				if(type == null || tmp.getTipo().equals(type)) {
-					this.next = tmp; // imposto il prossimo elemento next
-					return ret;
-				}
+			public boolean hasNext() {
+				return i.hasNext(); //delega
 			}
 
-			this.next = null; //se non lo trova next diventa null
-			return ret;
-		}
+			public Piatto next() {
+				return i.next(); //delega
+			}
+		};
 	}
+
+	public Iterator<Piatto> iteratorComplex(String type) { // ITERATOR
+	//questo iterator è relativamente complesso. L'aggiornamento della rappresentazione avviene man mano che si itera.
+	//è utile per strutture dati grandi dove un filtering su tutta la lista sarebbe troppo pesante
+
+		class IteraPiatti implements Iterator<Piatto> {
+			String type;
+			Piatto next;
+			Iterator<Piatto> iters;
+
+			private IteraPiatti(String type) {
+				this.type = type;
+				this.next = null;
+				this.iters = Menu.this.piatti.iterator();
+
+				this.updateNext();
+			}
+
+			private void updateNext() {
+				while(iters.hasNext()) {
+					Piatto tmp = iters.next();
+					if(type == null || tmp.getTipo().equals(type)) {
+						this.next = tmp; // imposto il prossimo elemento next
+						return;
+					}
+				}
+				this.next = null; //se non lo trova next diventa null
+			}
+
+			public boolean hasNext() { 
+				if(this.next == null)
+					return false;
+
+				return true;
+			}
+
+			public Piatto next(){
+				if(this.next == null)
+					throw new NoSuchElementException("Non ci sono più piatti");
+
+				Piatto ret = this.next;
+
+				this.updateNext();
+
+				return ret;
+			}
+		}
 
 		return new IteraPiatti(type);
 	}
@@ -164,7 +192,7 @@ public class Menu implements Iterable<Piatto> {
 			String nome = s.next();
 			String tipo = s.next();
 			String costos = s.next();
-			int costo = Integer.parseInt(costos.substring(0, costos.length() - 1));
+			int costo = Integer.parseInt(costos.substring(0, costos.length() - 3));
 			
 			try {
 				menu.aggiungiPiatto(new Piatto(nome, tipo, costo));
