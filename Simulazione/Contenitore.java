@@ -1,4 +1,4 @@
-public abstract class Contenitore implements Comparable<Contenitore> {
+public abstract class Contenitore implements Comparable<Contenitore>, Cloneable { //serve interfaccia Cloneable per permettere l'uso da fuori di clone
 //OVERVIEW: modella un contenitore ASTRATTO
 
 //attributes
@@ -83,6 +83,16 @@ public abstract class Contenitore implements Comparable<Contenitore> {
 
 		return ret;
 	}
+
+	@Override
+	public Object clone() {
+		try {
+			return super.clone(); //è sufficiente una shallow copy perchè tutti gli attributi sono primitivi o immutabili
+		} catch(CloneNotSupportedException e) {
+			return null; //non c'è ragione per cui questo possa accadere - visto che la classe super è Object, clone si può sempre fare, quindi maschero l'eccezione
+		}
+	}
+
 
 	public boolean repOk() {
 		if((tipo == null && volume != 0) || (tipo != null && volume == 0))

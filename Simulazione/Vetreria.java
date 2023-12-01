@@ -32,14 +32,14 @@ public class Vetreria implements Iterable<Contenitore> {
 		contenitori.sort(null);
 	}
 
-	public void add(Contenitore c) throws NullPointerException{
+	public void add(Contenitore c) throws NullPointerException {
 	//MODIFIES: this
 	//EFFECTS: aggiungi c a this
 	//         se c == null lancia NullPointerException
 		if(c == null)
 			throw new NullPointerException("c null");
 
-		this.contenitori.add(c);
+		this.contenitori.add((Contenitore) c.clone()); //clonare per evitare esposizione della rep
 
 		assert repOk();
 	}
