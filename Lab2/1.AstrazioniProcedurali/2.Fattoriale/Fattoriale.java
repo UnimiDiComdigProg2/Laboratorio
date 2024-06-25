@@ -18,6 +18,7 @@ public class Fattoriale {
 
 	public static void stampaFattoriali(ArrayList<Integer> l) {
 	//REQUIRES: l non nulla
+	//MODIFIES: System.out
 	//EFFECTS: stampa per ciascun elemento il suo indice e il suo valore
 		for(int i = 0; i < l.size(); i++)
 			System.out.println(i + " : " + l.get(i));
