@@ -20,8 +20,9 @@ class Primi implements Iterator<Integer> {
 			return 2;
 		}
 
-		for(int i = this.current; true; i++) { //per ogni numero i successivo all'ultimo primo restituito
+		for(int i = this.current; true; i=i+2) { //per ogni numero i dispari successivo all'ultimo primo restituito
 			for(int j : this.primi) { //per ogni primo j già generato
+				System.out.println("i: " + i + " j: " + j);
 				if(i%j == 0) //verificare se i è divisibile per j
 					break; //in tal caso i non sarà primo, prendo un nuovo i
 				

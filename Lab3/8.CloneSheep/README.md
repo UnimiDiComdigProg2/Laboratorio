@@ -8,7 +8,7 @@ Clonare la pecora in una nuova variabile e verificare che le due variabili siano
 ##### Esempio d'esecuzione:
 
 ```text
-$ java CloneSheep Dolly
+$ java Clone Dolly
 Inserisci i cromosomi, uno per riga (terminare con CTRL+D):
 GATTTAGACAGATTA
 TAGAGACATTTATAC
