@@ -7,7 +7,7 @@ In una classe statica `Ricevimento` evono essere specificate, implementate ed ut
 * `public static void prenota(String[] agenda, int ora, String nome) throws NullPointerException, AlreadyBookedException, TimeBusyException, IllegalArgumentException` che **modifica** l'array `agenda` assegnando all'ora indicata dall'indice dell'array (`0` = `13`, `1` = `14` ...) il nome dello studente. Questa procedura può lanciare le seguenti eccezioni (con opportuni messaggi diversi):
     * Se l'agenda è `null` la procedura lancia una `NullPointerException` ed il programma termina;
     * Se l'agenda non ha esattamente 6 elementi la procedura lancia una `IllegalArgumentException` ed il programma termina;
-    * Se il nome dello studente è vuoto la procedura lancia una `IllegalArgumentException` ed il programma torna a chiedere un'appuntamento;
+    * Se il nome dello studente è nullo o vuoto la procedura lancia una `IllegalArgumentException` ed il programma torna a chiedere un'appuntamento;
     * Se l'orario specificato non è valido la procedura lancia una `IllegalArgumentException` ed il programma torna a chiedere un'appuntamento;
     * Se l'orario è già prenotato (la stringa non è vuota) la procedura lancia una `TimeBusyException` (unchecked) ed il programma torna a chiedere un'appuntamento;
     * Se lo studente ha già prenotato un orario diverso la procedura lancia una `AlreadyBookedException` (checked) ed il programma torna a chiedere un'appuntamento;
