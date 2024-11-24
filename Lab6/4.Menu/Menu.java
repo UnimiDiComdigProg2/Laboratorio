@@ -65,13 +65,13 @@ public class Menu implements Iterable<Piatto> {
 		assert repOk();
 	}
 
-	public void togliPiatto(String piatto) throws NullPointerException, IllegalArgumentException { // MANIPULATOR
+	public void togliPiatto(Piatto piatto) throws NullPointerException, IllegalArgumentException { // MANIPULATOR
 	//MODIFIES: this
 	//EFFECTS: this method removes a piatto from the menu
 	//         if piatto is null or empty throws nullpointerexception
 
-		if(piatto == null || piatto.equals(""))
-			throw new NullPointerException("Piatto null o vuoto");
+		if(piatto == null)
+			throw new NullPointerException("Piatto null");
 
 		if(!piatti.contains(piatto))
 			throw new IllegalArgumentException("Piatto non esiste");
@@ -86,11 +86,11 @@ public class Menu implements Iterable<Piatto> {
 		// EFFECTS: this method modifies a plate in the menu
 		//          if plate is null throws a nullpointerexception
 
-		if(piattoOld == null || piattoOld.equals(""))
-			throw new NullPointerException("piattoOld null o vuoto");
+		if(piattoOld == null)
+			throw new NullPointerException("piattoOld null");
 
 		if(piattoNew == null)
-			throw new NullPointerException("piattoNew null o vuoto");
+			throw new NullPointerException("piattoNew null");
 
 		if(!piatti.contains(piattoOld))
 			throw new IllegalArgumentException("piattoOld non esiste");

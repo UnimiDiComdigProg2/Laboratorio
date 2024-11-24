@@ -8,23 +8,28 @@ class Matrice implements Iterable<Iterator<Integer>> {
 	private int[][] matrice;
 
 	public Matrice(int righe, int colonne) {
-	//REQUIRES: righe e colonne > 0
 	//MODIFIES: this
 	//EFFECTS: crea una nuova matrice righe*colonne
-		this.matrice = new int[righe][colonne];
+	//         se righe o colonne <= 0 lancia IllegalArgumentException
+		if(righe <= 0 || colonne <= 0)
+			throw new IllegalArgumentException("righe e colonne devono essere > 0");
+
+		matrice = new int[righe][colonne];
 
 		assert repOk();
 	}
 	
 	private boolean colonnaValida(int x) {
-		if((x < 0) || (x >= this.matrice[0].length))
+	//EFFECTS: true se colonna x esiste, false altrimenti
+		if((x < 0) || (x >= matrice[0].length))
 			return false;
 
 		return true;
 	}
 
 	private boolean rigaValida(int y) {
-		if((y < 0) || (y >= this.matrice.length))
+	//EFFECTS: true se riga y esiste, false altrimenti
+		if((y < 0) || (y >= matrice.length))
 			return false;
 
 		return true;
@@ -32,51 +37,52 @@ class Matrice implements Iterable<Iterator<Integer>> {
 
 	public int getVal(int x, int y) throws IllegalArgumentException {
 		if(!rigaValida(y))
-			throw new IllegalArgumentException("y deve essere tra 0 e " + this.matrice.length);
+			throw new IllegalArgumentException("y deve essere tra 0 e " + matrice.length);
 
 		if(!colonnaValida(x))
-			throw new IllegalArgumentException("x deve essere tra 0 e " + this.matrice[0].length);
+			throw new IllegalArgumentException("x deve essere tra 0 e " + matrice[0].length);
 
-		return(this.matrice[y][x]);
+		return(matrice[y][x]);
 	}
 
 	public void setVal(int x, int y, int v) throws IllegalArgumentException {
 		if(!rigaValida(y))
-			throw new IllegalArgumentException("y deve essere tra 0 e " + (this.matrice.length-1));
+			throw new IllegalArgumentException("y deve essere tra 0 e " + (matrice.length-1));
 
 		if(!colonnaValida(x))
-			throw new IllegalArgumentException("x deve essere tra 0 e " + (this.matrice[0].length-1));
+			throw new IllegalArgumentException("x deve essere tra 0 e " + (matrice[0].length-1));
 
-		this.matrice[y][x] = v;
+		matrice[y][x] = v;
 	}
 
 	public Iterator<Iterator<Integer>> iterator() {
-
+	//EFFECTS: restituisce degli Iterator<Integer> per ciascuna riga
+	//         questi restituiranno i valori degli elementi della riga
 		return new Iterator<Iterator<Integer>>() {
 			private int curR = 0; //riga corrente
 
 			public boolean hasNext() {
-				return Matrice.this.rigaValida(curR);
+				return rigaValida(curR);
 			}
 
 			public Iterator<Integer> next() throws NoSuchElementException {
-				if(!this.hasNext())
+				if(!hasNext())
 					throw new NoSuchElementException("non ci sono più righe");
 
-				this.curR++;
+				curR++;
 				return new Iterator<Integer>() {
 					private int curC = 0; //colonna corrente
 
 					public boolean hasNext() {
-						return Matrice.this.colonnaValida(curC);
+						return colonnaValida(curC);
 					}
 
 					public Integer next() throws NoSuchElementException {
-						if(!this.hasNext())
+						if(!hasNext())
 							throw new NoSuchElementException("non ci sono più colonne");
 
 						curC++;
-						return Matrice.this.matrice[curR-1][curC-1];
+						return matrice[curR-1][curC-1];
 					}
 				};
 			}

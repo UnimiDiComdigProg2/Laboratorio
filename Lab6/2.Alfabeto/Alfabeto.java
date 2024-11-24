@@ -2,9 +2,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 class Alfabeto implements Iterator<Character> {
-//OVERVIEW: Iterator che produce in sequenza le lettere dell'alfabeto ASCII
+//OVERVIEW: Iterator che produce in sequenza le lettere (minuscole) dell'alfabeto ASCII
 
-	char start = 'a', end = 'z', current = 'a';
+	char start, end, current;
 
 	public Alfabeto(char start, char end) throws IllegalArgumentException {
 	//MODIFIES: this
@@ -21,17 +21,17 @@ class Alfabeto implements Iterator<Character> {
 		if(start > end)
 			throw new IllegalArgumentException("la prima lettera è successiva alla seconda");
 
-		this.start = start;
-		this.current = start;
+		this.start = this.current = start;
 		this.end = end;
 	}
 
 	public Alfabeto() { //serve un costruttore base anche senza EFFECTS perchè esiste il costruttore coi parametri, altrimenti errore
+		this('a','z');
 	}
 
 	private static boolean letteraValida(char c) {
 	//EFFECTS: restituisce true se c è lettera ASCII valida, false altrimenti.
-		if((c>='a' && c<='z') || (c>='A' && c<='Z'))
+		if(c >= 'a' && c <= 'z')
 			return true;
 
 		return false;
