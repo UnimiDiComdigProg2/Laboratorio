@@ -9,16 +9,16 @@ public class Tris {
 	public Tris() {
 	//MODIFIES: this
 	//EFFECTS: inizializza un nuovo tabellone e imposta il turno al primo giocatore (`O`);
-		this.tabellone = new char[3][3];
-		this.turno = false;
-		this.conteggio = 0;
+		tabellone = new char[3][3];
+		turno = false;
+		conteggio = 0;
 
 		assert repOk(); //non serve per forza repOk perchè l'inizializzazione è semplice (assegnamenti diretti) e non dipende da parametri, ma è comunque utile in caso di cambiamenti al codice
 	}
 
 	public char turno() {
 	//EFFECTS: ritorna il carattere del giocatore corrispondente al turno da fare
-		return this.turno ? 'X' : 'O';
+		return turno ? 'X' : 'O';
 	}
 
 	public void mossa(int x, int y) throws IllegalArgumentException, PartitaTerminataException {
@@ -29,31 +29,31 @@ public class Tris {
 		if((x < 0) || (x > 2) || (y < 0) || (y > 2))
 			throw new IllegalArgumentException("x e y devono essere tra 1 a 3");
 
-		if(this.tabellone[x][y] != 0)
+		if(tabellone[x][y] != 0)
 			throw new IllegalArgumentException("Posizione occupata, riprova");
 
-		if(this.terminato())
+		if(terminato())
 			throw new PartitaTerminataException("Mosse finite");
 
-		if(this.vittoria())
+		if(vittoria())
 			throw new PartitaTerminataException("Ha già vinto l'avversario");
 
-		this.tabellone[x][y] = this.turno ? 'X' : 'O';
-		this.turno = !(this.turno);
-		this.conteggio++;
+		tabellone[x][y] = turno ? 'X' : 'O';
+		turno = !turno;
+		conteggio++;
 
 		assert repOk();
 	}
 
 	public boolean vittoria() {
 	//EFFECTS: se il giocatore che ha appena giocato ha vinto restituisce true, altrimenti false
-		char curr = this.turno ? 'O' : 'X';
+		char curr = turno ? 'O' : 'X'; //appena uno gioca il turno passa all'altro, quindi il controllo qua è su quello che ha appena concluso
 
-		for(int i=0;i<this.tabellone.length;i++)
-			if((this.tabellone[i][0] == curr && this.tabellone[i][1] == curr && this.tabellone[i][2] == curr) || (this.tabellone[0][i] == curr && this.tabellone[1][i] == curr && this.tabellone[2][i] == curr))
+		for(int i=0;i<tabellone.length;i++)
+			if((tabellone[i][0] == curr && tabellone[i][1] == curr && tabellone[i][2] == curr) || (tabellone[0][i] == curr && tabellone[1][i] == curr && tabellone[2][i] == curr))
 				return true;
 
-		if((this.tabellone[0][0] == curr && this.tabellone[1][1] == curr && this.tabellone[2][2] == curr) || (this.tabellone[0][2] == curr && this.tabellone[1][1] == curr && this.tabellone[2][0] == curr))
+		if((tabellone[0][0] == curr && tabellone[1][1] == curr && tabellone[2][2] == curr) || (tabellone[0][2] == curr && tabellone[1][1] == curr && tabellone[2][0] == curr))
 			return true;
 
 		return false;
@@ -61,7 +61,7 @@ public class Tris {
 
 	public boolean terminato() {
 	//EFFECTS: ritorna true se il tabellone è pieno
-		return this.conteggio == 9;
+		return conteggio == 9;
 	}
 
 	public boolean repOk() {
@@ -86,10 +86,10 @@ public class Tris {
 		ret+="|R\\C| 1 | 2 | 3 |\n";
 		ret+="-----------------\n";
 
-		for(int i=0;i<this.tabellone.length;i++) {
+		for(int i=0;i<tabellone.length;i++) {
 			ret+="| " + (i + 1) + " |";
 
-			for(int j=0;j<this.tabellone.length;j++)
+			for(int j=0;j<tabellone.length;j++)
 				if(tabellone[i][j] != 0)
 					ret+=" " + tabellone[i][j] + " |";
 				else

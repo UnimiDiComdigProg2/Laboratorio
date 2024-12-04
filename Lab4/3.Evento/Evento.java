@@ -56,7 +56,7 @@ public final class Evento {
 
 	@Override
 	public Evento clone() {
-		return copiaEvento(0);
+		return copiaEvento(0); //posso usare copiaEvento(0) in questo caso perchè crea un Evento identico ed è più facile da fare
 	}
 
 	@Override
