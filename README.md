@@ -4,4 +4,4 @@ Questa repository è riferita all'anno accademico 2024-2025
 
 Per accedere all'editor online per gli esercizi di questa repository usate il seguente link:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/UnimiDiComdigProg2/Laboratorio)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/UnimiDiComdigProg2/Laboratorio)
