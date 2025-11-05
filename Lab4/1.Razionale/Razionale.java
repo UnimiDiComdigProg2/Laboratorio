@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Razionale {
 //OVERVIEW: Classe che rappresenta un numero razionale. Deve avere delle variabili intere
 	private int numeratore;

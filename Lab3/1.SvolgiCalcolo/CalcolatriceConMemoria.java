@@ -133,6 +133,7 @@ public class CalcolatriceConMemoria {
 			System.out.println("valore in memoria: " + calc.getMem());
 		}
 
+		scan.close();
 		System.out.println("Il risultato finale e' " + calc.getMem());
 	}
 }
