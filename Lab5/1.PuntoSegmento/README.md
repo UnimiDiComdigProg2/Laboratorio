@@ -1,7 +1,12 @@
 # PuntoSegmento
 
-Progettare, specificare ed implementare una classe `Punto2d` che modella un punto in due dimensioni, `x` e `y`, su numeri razionali.
-Progettare, specificare ed implementare una classe `Segmento2d` utilizzando la classe Punto2D. Oltre ai metodi di utilità definire un metodo `length()` che ritorna la lunghezza del segmento. Scrivere un metodo `main()` per testare `Segmento2d` che legga un numero razionale `n` da **riga di comando** e una serie di segmenti nel formato `ax ay bx by` da **standard input**, stampando, tra tutti i segmenti, quelli con `length() > n`, come da esempio di esecuzione.
+Un `Punto2d` modella un punto in due dimensioni su numeri razionali. Due punti sono uguali se hanno le stesse coordinate.
+Un `Segmento2d` collega due istanze di `Punto2D` e può restituire la propria lunghezza attraverso un metodo `length()`.
+
+Progettare, specificare ed implementare le classi descritte ed i loro metodi. Quando opportuno, le classi dovranno avere costruttori, Abstraction Function e Representation Invariant, ed eventuali altri metodi o ridefinizioni dei metodi di classi estese o interfacce implementate. Dovranno esserci i controlli opportuni ed eventuali lanci di eccezioni appropriate.
+
+Scrivere i metodi `main()` per testare `Punto2d` e `Segmento2d`. Il metodo `main()` di `Punto2d` dovrà inizializzare tre punti: due con le stesse coordinate e uno con coordinate diverse, e poi scrivere su **standard output** i punti stessi e il loro confronto per uguaglianza.
+Il metodo `main()` di `Segmento2d` dovrà leggere un numero razionale `n` da **riga di comando** e una serie di segmenti nel formato `ax ay bx by` da **standard input**, stampando su **standard output**, tra tutti i segmenti, quelli con `length() > n`, come da esempio di esecuzione.
 
 ##### Esempio d'esecuzione:
 

@@ -1,3 +1,3 @@
 # PuntoSegmentoDelegate
 
-Riscrivere `Punto3D` per utilizzare la tecnica di composizione e delega. Definire un'interfaccia Segmento con i metodi abstract comuni a `Segmento2D` e `Segmento3D` e usarla per reimplementare ciascuno dei due Segmenti. Adattare le rappresentazioni e i metodi (inclusi equals, toString e repOk) in maniera appropriata. Ripetere il testing delle classi copiando i metodi main() precedenti.
+Riscrivere `Punto3D` per utilizzare la tecnica di composizione e delega. Definire un'interfaccia Segmento con i metodi abstract comuni a `Segmento2D` e `Segmento3D` e usarla per reimplementare ciascuno dei due Segmenti. Adattare le rappresentazioni e i metodi (inclusi `equals()`, `toString()` e `repOk()`) in maniera appropriata. Ripetere il testing delle classi copiando i metodi `main()` precedenti.

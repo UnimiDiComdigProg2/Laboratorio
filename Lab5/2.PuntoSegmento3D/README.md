@@ -1,15 +1,16 @@
 # PuntoSegmento3D
 
-Progettare, specificare ed implementare una classe Punto3D che estende Punto2D con aggiunta di coordinata z, ridefinendo opportunamente i metodi del Punto2D. Scrivere Segmento3D, ridefinendo opportunamente i metodi del Segmento2D. Scrivere un metodo `main()` in Segmento3D per testare la classe in modo analogo allo scorso esercizio, come da esempio di esecuzione.
+Progettare, specificare ed implementare una classe `Punto3D` che estenda `Punto2D` con aggiunta di coordinata  `z`, ridefinendo opportunamente i metodi del `Punto2D`. Scrivere `Segmento3D`, ridefinendo opportunamente i metodi del `Segmento2D`.
+Scrivere i metodi `main()` in `Punto3D` e `Segmento3D` per testare la classe in modo analogo allo scorso esercizio, come da esempio di esecuzione.
 
 Ragionare inoltre sulle seguenti domande:
-* Quali attributi di Punto2D può riutilizzare Punto3D? Quali metodi?
-* Quali attributi di Segmento2D può riutilizzare Segmento3D? Quali metodi?
-* Ha senso costruire Segmento3D estendendo Segmento2D? perchè cosa 
-* Ha senso riscrivere Punto3D per ottenere lo stesso effetto per composizione e delega invece che per estensione?
-* Ha senso scrivere un'interfaccia per mettere in relazione Punto2D e Punto3D?
-* Ha senso riscrivere Segmento3D per ottenere lo stesso effetto per composizione e delega invece che per estensione?
-* Ha senso scrivere un'interfaccia per mettere in relazione Segmento2D e Segmento3D?
+* Quali attributi di `Punto2D` può riutilizzare `Punto3D`? Quali metodi?
+* Quali attributi di `Segmento2D` può riutilizzare `Segmento3D`? Quali metodi?
+* Ha senso costruire `Segmento3D` estendendo `Segmento2D`? perchè cosa 
+* Ha senso riscrivere `Punto3D` per ottenere lo stesso effetto per composizione e delega invece che per estensione?
+* Ha senso scrivere un'interfaccia per mettere in relazione `Punto2D` e `Punto3D`?
+* Ha senso riscrivere `Segmento3D` per ottenere lo stesso effetto per composizione e delega invece che per estensione?
+* Ha senso scrivere un'interfaccia per mettere in relazione `Segmento2D` e `Segmento3D`?
 
 
 ##### Esempio d'esecuzione:
