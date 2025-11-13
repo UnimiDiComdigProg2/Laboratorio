@@ -8,6 +8,7 @@ Implementare un metodo `main()` per il testing della classe. Il metodo deve legg
 
 ```text
 $ java Fibonacci 9
+0
 1
 1
 2
