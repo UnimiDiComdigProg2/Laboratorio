@@ -20,7 +20,7 @@ public class Razionale {
 	public void setDenominatore(int denominatore) {
 	// MODIFIES: this
 	// EFFECTS: imposta this col denominatore specificato;
-	//          se == 0 lancia ArithmeticException
+	//          se denominatore == 0 lancia ArithmeticException
 		if(denominatore == 0)
 			throw new ArithmeticException("Denominatore del razionale e' zero");
 

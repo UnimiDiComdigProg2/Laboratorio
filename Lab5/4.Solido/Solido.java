@@ -1,21 +1,19 @@
 public abstract class Solido implements Comparable<Solido> {
-//OVERVIEW: modella un solido (ASTRATTO,IMMUTABILE)
+//OVERVIEW: modella un Solido Astratto, comparabile
 
-    public abstract double volume();
-    //EFFECTS: restituisce il volume del solido;
+	public abstract String tipo();
+	//EFFECTS: restituisce una stringa con il tipo del solido
 
-    @Override
-    public int compareTo(Solido o) {
-        //return this.volume() - o.volume();
+	public abstract double volume();
+	//EFFECTS: restituisce il volume del solido
 
-        return Double.compare(this.volume(), o.volume());
-        
-    }
+	@Override
+	public int compareTo(Solido o) { //implementato per comportamento!
+		return Double.compare(this.volume(),o.volume());
+	}
 
-    @Override
-    public String toString() {
-        return "SOLIDO (" + this.volume() + ")"
-    }
-
-    
+	@Override
+	public String toString() {
+		return "Solido (" + tipo() + ") " + volume() + " ";
+	}
 }

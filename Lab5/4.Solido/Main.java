@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main  {
@@ -14,11 +16,23 @@ public class Main  {
 		Cono co = new Cono(rc, hc);
 		System.out.println(co);
 
-		if(sf.compareTo(co) > 0) //purtroppo non c'è overload degli operatori quindi si usa compareTo (come equals invece di ==)
-			System.out.println("La sfera ha un volume maggiore del cono");
-		else if(sf.compareTo(co) < 0)
-			System.out.println("Il cono ha un volume maggiore della sfera");
-		else
-			System.out.println("Il cono e la sfera hanno lo stesso volume");
+		ArrayList<Solido> als = new ArrayList<>();
+
+		als.add(sf);
+		als.add(co);
+
+		Comparator<Solido> c = new Comparator<Solido>() {
+			
+			@Override
+			public int compare(Solido a, Solido b) {
+				return Double.compare(b.volume(), a.volume());
+			}
+
+		};
+
+		als.sort(c);
+
+		System.out.println(als);
+		
 	}
 }
