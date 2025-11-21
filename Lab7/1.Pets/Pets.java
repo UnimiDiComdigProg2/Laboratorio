@@ -1,41 +1,46 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Pets {
 	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		List<Persona> l = new ArrayList<>();
 
-        ArrayList<Person> persons = new ArrayList<>();
+		System.out.println("Inserisci righe nel formato `nomePersona nomeAnimale tipoAnimale` (CTRL+D per terminare)");
+		while(s.hasNext()) {
+			Persona pers = new Persona(s.next());
 
-        Scanner s = new Scanner(System.in);
+			if(l.indexOf(pers) != -1)
+				pers = l.get(l.indexOf(pers));
+			else
+				l.add(pers);
 
-        while(s.hasNextLine()) {
+			String nomepet = s.next();
 
-            String line = s.nextLine();
+			try {
+				switch (s.next()) {
+					case "Cane":
+						pers.add(new Cane(nomepet));
+						break;
+					case "Gatto":
+						pers.add(new Gatto(nomepet));
+						break;
+					case "Cavia":
+						pers.add(new Cavia(nomepet));
+						break;
+					default:
+						System.exit(1);
+				}
+			} catch(PetException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-            String[] lineParts = line.split(" ");
-
-            Person p = new Person(lineParts[0]);
-
-            int personId = persons.indexOf(p);
-
-            if(personId != -1)
-                p = persons.get(personId);
-            else
-                persons.add(p);
-
-            try {
-                if(lineParts[2].equals("Cane"))
-                    p.add(new Dog(lineParts[1]));
-                else if(lineParts[2].equals("Gatto"))
-                    p.add(new Cat(lineParts[1]));
-                else if(lineParts[2].equals("Cavia"))
-                    p.add(new Rat(lineParts[1]));
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-        for(Person tp : persons)
-            System.out.println(tp);
-    }
+		for(Persona tp : l) {
+			System.out.println("\nIl coro degli animali di " + tp.getNome() + ":");
+			for(Pet pet : tp)
+				System.out.println("\t" + pet.getNome() + " dice " + pet.verso());
+		}
+	}
 }

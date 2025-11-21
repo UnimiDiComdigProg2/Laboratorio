@@ -1,55 +1,43 @@
-abstract class Pet {
-//OVERVIEW: modella un Pet astratto immutabile
+public abstract class Pet {
+//OVERVIEW: modella una classe astratta Pet
+	private final String nome;
 
-    public final String nome;
+	public Pet(String nome) throws IllegalArgumentException {
+	//MODIFIES: this
+	//EFFECTS: inizializza pet col nome
+	//         se nome nullo o vuoto lancia IllegalArgumentException
+	if(nome == null || nome.equals(""))
+		throw new IllegalArgumentException("nome nullo o vuoto");
 
-    public Pet(String nome) throws IllegalArgumentException {
-    //MODIFIES: this
-    //EFFECTS: inizializza this
-    //         se nome null o vuoto lancia IllegalArgumentException
-        if(nome == null || nome.equals(""))
-            throw new IllegalArgumentException("nome null o vuoto");
+		this.nome = nome;
+	}
 
-        this.nome = nome;
-    }
+	public abstract String verso();
+	//EFFECTS: restituisce il verso del Pet
 
-    abstract public String verso();
-    //EFFECTS: restituisce il verso dell'animale
+	public String getNome() {
+		return nome;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if(this == o)
-            return true;
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 
-        if(o == null)
-            return false;
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
 
-        if(!(this.getClass().equals(o.getClass())))
-            return false;
+		if(o == null)
+			return false;
 
-        Pet t = (Pet)o;
+		if(!(this.getClass().equals(o.getClass())))
+			return false;
 
-        if(this.nome.equals(t.nome))
-            return true;
+		if(!(this.getNome().equals(((Pet) o).getNome())))
+			return false;
 
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return nome;
-    }
-
-    public static void main(String[] args) {
-
-        Pet c = new Cat("Aretha");
-        Pet d = new Dog("Axel");
-        Pet r = new Rat("Axel");
-
-        System.out.println(c);
-        System.out.println(d);
-        System.out.println(r);
-
-        System.out.println(d.equals(r));
-    }
+		return true;
+	}
 }

@@ -1,67 +1,78 @@
+import java.util.NoSuchElementException;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class Massimo<T> {
-    //OVERVIEW: modella una classe che mantiene un valore massimo tra quelli inseriti
+//OVERVIEW: classe che mantiene il valore massimo tra quelli inseriti
+	T max = null; //non serve repOk perchè max può essere qualunque T, anche null
+	final Comparator<T> comp; //comp può essere qualunque Comparator<T>, anche null
 
-    T max;
-    final Comparator<T> c;
+	public Massimo() {
+		this(null);
+	}
 
-    public Massimo(Comparator<T> c) {
-    //MODIFIES: this
-    //EFFECTS: inizializza this con un comparator c che può anche essere nullo 
-        this.c = c;
-    }
+	public Massimo(Comparator<T> comp) throws IllegalArgumentException{
+	//MODIFIES: this
+	//EFFECTS: inizializza this con Comparator
+		this.comp = comp;
+	}
 
-    public T getMax() {
-    //EFFECTS: restituisce l'elemento massimo inserito
-        return max;
-    }
+	public T getMax() {
+	//EFFECTS: restituisce max
+	//         se non ancora inseriti elementi lancia NoSuchElementException
+		if(max == null)
+			throw new NoSuchElementException("no element yet inserted");
 
-    public void insert(T t) throws IllegalArgumentException {
-    //MODIFIES: this
-    //EFFECTS: inserisce t in this se t è maggiore di getMax();
-    //         se t null lancia IllegalArgumentException
-        if(t == null)
-            throw new IllegalArgumentException("t null");
+		return this.max; //vorrei manon posso clonare Max perchè non so cos'è - potrebbe essere non-clonabile
+		//il risultato è che max potrà essere modificato da fuori. Magari diventa meno max di altri inseriti
+		//non ho garanzie che è il valore più alto inserito, solo che lo era al momento dell'inseriomento
+	}
 
-        if(this.max == null)
-            this.max = t;
-        else if(c != null)
-            if(c.compare(t,max) > 0)
-                this.max = t;
-        else if(t instanceof Comparable)
-            if(((Comparable) t).compareTo(this.max) > 0)
-                this.max = t;
-    }
+	@SuppressWarnings("unchecked")
+	public void insert(T t) throws UnsupportedOperationException {
+	//MODIFIES: this
+	//EFFECTS: inserisce t in max se maggiore di valori precedenti
+	//         se t non è comparable e non viene fornito un comparator lancia una UnsupportedOperationException
+		if((this.comp == null) && !(t instanceof Comparable))
+			throw new UnsupportedOperationException("oggetti non comparabili");
 
-    @Override
-    public String toString() {
-        return "Massimo<" + max.getClass().getSimpleName() + ">: " + max;
-    }
+		if(this.max == null) {
+			this.max = t; //vorrei manon posso clonare Max perchè non so cos'è - potrebbe essere non-clonabile
+		} else if(this.comp != null) {
+			if(comp.compare(t, max) > 0)
+				this.max = t; //idem
+		} else if(t instanceof Comparable) {
+			if(((Comparable) t).compareTo(this.max) > 0)
+				this.max = t; //idem
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Massimo<"+ max.getClass().getSimpleName() + ">: " + max;
+	}
 
 	public static void main(String[] args) {
 
-        Massimo<Integer> m1 = new Massimo<>(null);
+	Massimo<String> mLex = new Massimo<>();
+		Massimo<String> mLen = new Massimo<>(new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return Integer.compare(o1.length(),o2.length());
+			}
+		});
 
-        m1.insert(1);
-        m1.insert(5);
-        m1.insert(2);
+		Scanner s = new Scanner(System.in);
 
-        System.out.println(m1);
+		System.out.println("Inserisci Stringhe (CTRL+D per terminare)");
+		while(s.hasNext()) {
+			String str = s.next();
 
-        Comparator<String> comp = new Comparator<>(){
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.length() - o2.length();
-            }
-        };
+			mLex.insert(str);
+			mLen.insert(str);
+		}
 
-        Massimo<String> m2 = new Massimo<>(comp);
-        m2.insert("zasefda");
-        m2.insert("aaaaadadadasdsa");
-
-
-
-        System.out.println(m2);
-    }
+		System.out.println(mLex + " (lessicografico)");
+		System.out.println(mLen + " (lunghezza)");
+	}
 }
