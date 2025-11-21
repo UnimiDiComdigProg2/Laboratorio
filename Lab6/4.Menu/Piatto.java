@@ -1,8 +1,8 @@
 public class Piatto {
 //OVERVIEW: modella un piatto (immutabile)
 
-	final String nome, tipo;
-	final int costo;
+	public final String nome, tipo;
+	public final int costo;
 
 	public Piatto(String nome, String tipo, int costo) throws IllegalArgumentException {
 	//MODIFIES: this;
@@ -52,6 +52,8 @@ public class Piatto {
 		Piatto p1 = new Piatto("Tiramisù", "dessert", 8);
 		Piatto p2 = new Piatto("Tiramisì", "dessert", 8);
 
+		System.out.println(p1);
+		System.out.println(p2);
 		System.out.println(p1.equals(p2));
 	}
 }

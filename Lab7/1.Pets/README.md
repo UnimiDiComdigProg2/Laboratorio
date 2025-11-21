@@ -1,6 +1,6 @@
 # Pets
 
-Un `Pet`, definito dal nome dell'animale domestico che rappresenta, può essere  `Cane`, `Gatto` e `Cavia` e espone come funzionalità quella di stampare su **standard output** il verso dell'animale. Il verso specifico dipende dal tipo di `Pet`, come da esempio di esecuzione. Inoltre due `Pet` sono considerati uguali se hanno lo stesso nome e lo stesso tipo.
+Un `Pet`, definito dal nome dell'animale domestico che rappresenta, può essere  `Cane`, `Gatto` e `Cavia` e espone come funzionalità quella di restituire il verso dell'animale. Il verso specifico dipende dal tipo di `Pet`, come da esempio di esecuzione. Inoltre due `Pet` sono considerati uguali se hanno lo stesso nome e lo stesso tipo.
 
 Una `Persona`, identificata da nome, presenta le seguenti funzionalità:
 * aggiungere alla `Persona` un `Pet`. Se il pet è già presente lancia una `PetException` (Checked).
